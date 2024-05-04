@@ -1,2 +1,3 @@
 # MIMS
-Cat's Inventory management system
+Cat's Inventory Management System
+喵子的库存管理系统
