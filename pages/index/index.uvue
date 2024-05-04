@@ -1,0 +1,67 @@
+<template>
+	<view class="content">
+		<image class="logo" src="/static/logo.png"></image>
+		<view class="text-area">
+			<text class="title">{{ title }}</text>
+			<button class="btn" @click="goToSearch">搜索电器</button>
+			<button class="btn" @click="goToManage">管理仓库</button>
+			<button class="btn" @click="goToManage">待处理订单</button>
+			<button class="btn" @click="goToManage">已处理订单</button>
+		</view>
+	</view>
+</template>
+
+<script>
+	export default {
+		data() {
+			return {
+				title: '欢迎来到喵子家的电器管理系统'
+			}
+		},
+		methods: {
+			goToSearch() {
+				// 使用 uni.navigateTo 跳转到搜索页面
+				uni.navigateTo({
+					url: '/pages/search/search'
+				});
+			},
+			goToManage() {
+				// 使用 uni.navigateTo 跳转到管理页面
+				uni.navigateTo({
+					url: '/pages/manageInfo/manageInfo'
+				});
+			}
+		}
+	}
+</script>
+
+<style>
+	.content {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	.logo {
+		height: 200rpx;
+		width: 200rpx;
+		margin-top: 200rpx;
+		margin-bottom: 50rpx;
+	}
+
+	.title {
+		font-size: 36rpx;
+		color: #8f8f94;
+	}
+
+	.btn {
+		margin-top: 20px;
+		padding: 10px 20px;
+		background-color: #007bff;
+		color: #ffffff;
+		border: none;
+		border-radius: 5px;
+		font-size: 16px;
+		cursor: pointer;
+	}
+</style>
