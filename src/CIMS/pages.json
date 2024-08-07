@@ -1,0 +1,64 @@
+{
+  "pages": [
+    {
+      "path": "pages/home/home",
+      "style": {
+        "navigationBarTitleText": "主页"
+      }
+    },
+    {
+      "path": "pages/storage/storage",
+      "style": {
+        "navigationBarTitleText": "入库"
+      }
+    },
+    {
+      "path": "pages/search/search",
+      "style": {
+        "navigationBarTitleText": "搜索"
+      }
+    },
+    {
+      "path": "pages/competitors/competitors",
+      "style": {
+        "navigationBarTitleText": "友商"
+      }
+    },
+    {
+      "path": "pages/profile/profile",
+      "style": {
+        "navigationBarTitleText": "个人"
+      }
+    },
+    {
+      "path": "pages/details/details",
+      "style": {
+        "navigationBarTitleText": "详情"
+      }
+    }
+  ],
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "backgroundColor": "#ffffff",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/storage/storage",
+        "text": "入库"
+      },
+      {
+        "pagePath": "pages/search/search",
+        "text": "搜索"
+      },
+      {
+        "pagePath": "pages/competitors/competitors",
+        "text": "友商"
+      },
+      {
+        "pagePath": "pages/profile/profile",
+        "text": "个人"
+      }
+    ]
+  }
+}

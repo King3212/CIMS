@@ -1,0 +1,7 @@
+{
+  "name": "getType",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}

@@ -1,0 +1,149 @@
+<template>
+  <view class="home">
+    <view class="header">
+      <view class="notifications">
+        <text class="badge">未完成入库 <text class="badge-number">3</text></text>
+      </view>
+    </view>
+    <view class="main">
+      <view v-if="loading && !appliances.length" class="loading">加载中...</view>
+      <view v-else>
+        <view v-if="error" class="error">{{ error }}</view>
+        <view v-else>
+          <view class="appliance-card" v-for="appliance in appliances" :key="appliance._id" @click="goToDetails(appliance)">
+            <view class="header">
+              <text>类型：{{ appliance.Type }}    品牌：{{ appliance.Brand }}    入库价格：{{ appliance.In_price }}</text>
+            </view>
+            <view class="description">
+              {{ appliance.description }}
+            </view>
+            <view class="tags">
+              {{ appliance.tag }}
+            </view>
+          </view>
+          <button v-if="!loading && hasMore" @click="loadMore">加载更多</button>
+        </view>
+      </view>
+    </view>
+  </view>
+</template>
+
+<script>
+import { ref, onMounted } from 'vue';
+
+export default {
+  setup() {
+    const appliances = ref([]);
+    const loading = ref(true);
+    const error = ref(null);
+    const page = ref(1);
+    const pageSize = 20;
+    const hasMore = ref(true);
+
+    const fetchAppliances = async () => {
+      if (!hasMore.value) return;
+      loading.value = true;
+      try {
+        const res = await uniCloud.callFunction({
+          name: 'getAppliances',
+          data: {
+            page: page.value,
+            pageSize
+          }
+        });
+        if (res.result && res.result.data) {
+          appliances.value = [...appliances.value, ...res.result.data];
+          if (res.result.data.length < pageSize) {
+            hasMore.value = false;
+          }
+          page.value++;
+        }
+      } catch (err) {
+        error.value = 'Error fetching appliances: ' + err.message;
+      } finally {
+        loading.value = false;
+      }
+    };
+
+    const goToDetails = (appliance) => {
+      uni.navigateTo({
+        url: `/pages/details/details?data=${encodeURIComponent(JSON.stringify(appliance))}`
+      });
+    };
+
+    onMounted(fetchAppliances);
+
+    return {
+      appliances,
+      loading,
+      error,
+      hasMore,
+      fetchAppliances,
+      goToDetails,
+      loadMore: fetchAppliances
+    };
+  }
+};
+</script>
+
+<style scoped>
+.home {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100vh;
+}
+
+.header {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+}
+
+.notifications {
+  display: flex;
+  justify-content: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  overflow-y: auto;
+  flex: 1;
+}
+
+.loading {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.error {
+  text-align: center;
+  color: red;
+  margin-top: 20px;
+}
+
+.appliance-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ddd;
+  margin: 10px;
+  padding: 10px;
+  width: 80%;
+}
+
+.appliance-card .header {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.appliance-card .description,
+.appliance-card .tags {
+  text-align: center;
+}
+</style>

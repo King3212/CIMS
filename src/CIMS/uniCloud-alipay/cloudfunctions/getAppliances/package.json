@@ -1,0 +1,7 @@
+{
+  "name": "getAppliances",
+  "dependencies": {},
+  "extensions": {
+    "uni-cloud-jql": {}
+  }
+}
