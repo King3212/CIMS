@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cat_back.mapper.StoreMapper">
+
+    
+
+    <!-- getById --> 
+
+    <select id="findById" resultType="Long">
+      	SELECT * FROM stores
+		WHERE id = #{id}
+  </select>
+
+    <!-- insertOne --> 
+
+    <insert id="insertOne" parameterType="com.example.model.Store">
+        INSERT INTO stores (name, manager)
+        VALUES (#{store.name}, #{store.manager});
+    </insert>
+
+    <!-- editManager --> 
+
+    <update id="editManager" parameterType="com.example.model.Store">
+        UPDATE stores
+        SET manager = #{store.manager}
+        WHERE id = #{store.id};
+    </update>
+
+    <!-- editName --> 
+
+    <update id="editName" parameterType="com.example.model.Store">
+        UPDATE stores
+        SET name = #{store.name}
+        WHERE id = #{store.id};
+    </update>
+
+    <!-- DeleteStore --> 
+
+    <delete id="DeleteStore" parameterType="com.example.model.Store">
+        DELETE FROM stores WHERE id = #{store.id};   
+    </delete>    
+    </mapper>

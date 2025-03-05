@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cat_back.mapper.CargoMapper">
+
+    
+
+    <filterCargosUnselt> 
+
+    <select id="filterCargosUnselt" resultType="com.example.model.CargoFilterParams">
+        SELECT * FROM cargos
+        WHERE price_out = NULL
+        <if test="type != null and type != ''">
+            AND type = #{type}
+        </if>
+        <if test="brand != null and brand != ''">
+            AND brand = #{brand}
+        </if>
+        <if test="minPrice != null">
+            AND price_in >= #{minPrice}
+        </if>
+        <if test="maxPrice != null">
+            AND price_in <= #{maxPrice}
+        </if>
+        <if test="fineness != null">
+            AND fineness = #{fineness}
+        </if>
+        <if test="storesId != null">
+            AND stores_id = #{storesId}
+        </if>
+        <if test="description != null and description != ''">
+            AND description LIKE CONCAT('%', #{description}, '%')
+        </if> 
+    </select>
+
+  <!-- findById --> 
+
+    <select id="findById" resultType="Long">
+      	SELECT * FROM cargos
+		WHERE id = #{id}
+    </select>
+
+    <!-- filterCargosSelt --> 
+
+    <select id="filterCargosSelt" resultType="com.example.model.Cargo">
+    SELECT * FROM cargos
+        WHERE price_out IS NULL
+        <if test="type != null and type != ''">
+            AND type = #{type}
+        </if>
+        <if test="brand != null and brand != ''">
+            AND brand = #{brand}
+        </if>
+        <if test="minPrice != null">
+            AND price_in >= #{minPrice}
+        </if>
+        <if test="maxPrice != null">
+            AND price_in <= #{maxPrice}
+        </if>
+        <if test="fineness != null">
+            AND fineness = #{fineness}
+        </if>
+        <if test="storesId != null">
+            AND stores_id = #{storesId}
+        </if>
+        <if test="description != null and description != ''">
+            AND description LIKE CONCAT('%', #{description}, '%')
+        </if> 
+    </select>  
+</mapper>
