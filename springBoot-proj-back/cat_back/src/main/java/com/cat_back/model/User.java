@@ -1,33 +1,25 @@
 package com.cat_back.model;
 
 public class User {
-    private int id;
+    private Integer id;
+
     private String name;
-    private String phone;       // 唯一约束
-    private String openId;      // 唯一约束
-    private int storesId;       // 外键关联 stores 表
-    private String salt;        // 用于密码加密
-    private String localHash;   // 存储加密后的密码
 
-    // 构造方法
-    public User() {}
+    private String phone;
 
-    public User(int id, String name, String phone, String openId, int storesId, String salt, String localHash) {
-        this.id = id;
-        this.name = name;
-        this.phone = phone;
-        this.openId = openId;
-        this.storesId = storesId;
-        this.salt = salt;
-        this.localHash = localHash;
-    }
+    private String openId;
 
-    // Getter 和 Setter 方法
-    public int getId() {
+    private Integer storesId;
+
+    private String localHash;
+
+    private String randomCode;
+
+    public Integer getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -36,7 +28,7 @@ public class User {
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.name = name == null ? null : name.trim();
     }
 
     public String getPhone() {
@@ -44,7 +36,7 @@ public class User {
     }
 
     public void setPhone(String phone) {
-        this.phone = phone;
+        this.phone = phone == null ? null : phone.trim();
     }
 
     public String getOpenId() {
@@ -52,23 +44,15 @@ public class User {
     }
 
     public void setOpenId(String openId) {
-        this.openId = openId;
+        this.openId = openId == null ? null : openId.trim();
     }
 
-    public int getStoresId() {
+    public Integer getStoresId() {
         return storesId;
     }
 
-    public void setStoresId(int storesId) {
+    public void setStoresId(Integer storesId) {
         this.storesId = storesId;
-    }
-
-    public String getSalt() {
-        return salt;
-    }
-
-    public void setSalt(String salt) {
-        this.salt = salt;
     }
 
     public String getLocalHash() {
@@ -76,20 +60,14 @@ public class User {
     }
 
     public void setLocalHash(String localHash) {
-        this.localHash = localHash;
+        this.localHash = localHash == null ? null : localHash.trim();
     }
 
-    // toString 方法，方便打印对象信息
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", phone='" + phone + '\'' +
-                ", openId='" + openId + '\'' +
-                ", storesId=" + storesId +
-                ", salt='" + salt + '\'' +
-                ", localHash='" + localHash + '\'' +
-                '}';
+    public String getRandomCode() {
+        return randomCode;
+    }
+
+    public void setRandomCode(String randomCode) {
+        this.randomCode = randomCode == null ? null : randomCode.trim();
     }
 }

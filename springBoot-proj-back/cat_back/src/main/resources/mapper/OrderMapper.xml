@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.cat_back.mapper.StoreMapper" >
-  <resultMap id="BaseResultMap" type="com.cat_back.model.Store" >
+<mapper namespace="com.cat_back.mapper.OrderMapper" >
+  <resultMap id="BaseResultMap" type="com.cat_back.model.Order" >
     <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="name" property="name" jdbcType="VARCHAR" />
-    <result column="manager_id" property="managerId" jdbcType="INTEGER" />
+    <result column="users_id" property="usersId" jdbcType="INTEGER" />
+    <result column="cargos_id" property="cargosId" jdbcType="INTEGER" />
+    <result column="deal_time" property="dealTime" jdbcType="TIMESTAMP" />
+    <result column="stores_id" property="storesId" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -65,15 +67,15 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    id, name, manager_id
+    id, users_id, cargos_id, deal_time, stores_id
   </sql>
-  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cat_back.model.StoreExample" >
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.cat_back.model.OrderExample" >
     select
     <if test="distinct" >
       distinct
     </if>
     <include refid="Base_Column_List" />
-    from stores
+    from orders
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
@@ -84,67 +86,85 @@
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
-    from stores
+    from orders
     where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from stores
+    delete from orders
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <delete id="deleteByExample" parameterType="com.cat_back.model.StoreExample" >
-    delete from stores
+  <delete id="deleteByExample" parameterType="com.cat_back.model.OrderExample" >
+    delete from orders
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </delete>
-  <insert id="insert" parameterType="com.cat_back.model.Store" >
-    insert into stores (id, name, manager_id
-      )
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{managerId,jdbcType=INTEGER}
-      )
+  <insert id="insert" parameterType="com.cat_back.model.Order" >
+    insert into orders (id, users_id, cargos_id, 
+      deal_time, stores_id)
+    values (#{id,jdbcType=INTEGER}, #{usersId,jdbcType=INTEGER}, #{cargosId,jdbcType=INTEGER}, 
+      #{dealTime,jdbcType=TIMESTAMP}, #{storesId,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.cat_back.model.Store" >
-    insert into stores
+  <insert id="insertSelective" parameterType="com.cat_back.model.Order" >
+    insert into orders
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         id,
       </if>
-      <if test="name != null" >
-        name,
+      <if test="usersId != null" >
+        users_id,
       </if>
-      <if test="managerId != null" >
-        manager_id,
+      <if test="cargosId != null" >
+        cargos_id,
+      </if>
+      <if test="dealTime != null" >
+        deal_time,
+      </if>
+      <if test="storesId != null" >
+        stores_id,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
       <if test="id != null" >
         #{id,jdbcType=INTEGER},
       </if>
-      <if test="name != null" >
-        #{name,jdbcType=VARCHAR},
+      <if test="usersId != null" >
+        #{usersId,jdbcType=INTEGER},
       </if>
-      <if test="managerId != null" >
-        #{managerId,jdbcType=INTEGER},
+      <if test="cargosId != null" >
+        #{cargosId,jdbcType=INTEGER},
+      </if>
+      <if test="dealTime != null" >
+        #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storesId != null" >
+        #{storesId,jdbcType=INTEGER},
       </if>
     </trim>
   </insert>
-  <select id="countByExample" parameterType="com.cat_back.model.StoreExample" resultType="java.lang.Integer" >
-    select count(*) from stores
+  <select id="countByExample" parameterType="com.cat_back.model.OrderExample" resultType="java.lang.Integer" >
+    select count(*) from orders
     <if test="_parameter != null" >
       <include refid="Example_Where_Clause" />
     </if>
   </select>
   <update id="updateByExampleSelective" parameterType="map" >
-    update stores
+    update orders
     <set >
       <if test="record.id != null" >
         id = #{record.id,jdbcType=INTEGER},
       </if>
-      <if test="record.name != null" >
-        name = #{record.name,jdbcType=VARCHAR},
+      <if test="record.usersId != null" >
+        users_id = #{record.usersId,jdbcType=INTEGER},
       </if>
-      <if test="record.managerId != null" >
-        manager_id = #{record.managerId,jdbcType=INTEGER},
+      <if test="record.cargosId != null" >
+        cargos_id = #{record.cargosId,jdbcType=INTEGER},
+      </if>
+      <if test="record.dealTime != null" >
+        deal_time = #{record.dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.storesId != null" >
+        stores_id = #{record.storesId,jdbcType=INTEGER},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -152,30 +172,40 @@
     </if>
   </update>
   <update id="updateByExample" parameterType="map" >
-    update stores
+    update orders
     set id = #{record.id,jdbcType=INTEGER},
-      name = #{record.name,jdbcType=VARCHAR},
-      manager_id = #{record.managerId,jdbcType=INTEGER}
+      users_id = #{record.usersId,jdbcType=INTEGER},
+      cargos_id = #{record.cargosId,jdbcType=INTEGER},
+      deal_time = #{record.dealTime,jdbcType=TIMESTAMP},
+      stores_id = #{record.storesId,jdbcType=INTEGER}
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
   </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.cat_back.model.Store" >
-    update stores
+  <update id="updateByPrimaryKeySelective" parameterType="com.cat_back.model.Order" >
+    update orders
     <set >
-      <if test="name != null" >
-        name = #{name,jdbcType=VARCHAR},
+      <if test="usersId != null" >
+        users_id = #{usersId,jdbcType=INTEGER},
       </if>
-      <if test="managerId != null" >
-        manager_id = #{managerId,jdbcType=INTEGER},
+      <if test="cargosId != null" >
+        cargos_id = #{cargosId,jdbcType=INTEGER},
+      </if>
+      <if test="dealTime != null" >
+        deal_time = #{dealTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="storesId != null" >
+        stores_id = #{storesId,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.cat_back.model.Store" >
-    update stores
-    set name = #{name,jdbcType=VARCHAR},
-      manager_id = #{managerId,jdbcType=INTEGER}
+  <update id="updateByPrimaryKey" parameterType="com.cat_back.model.Order" >
+    update orders
+    set users_id = #{usersId,jdbcType=INTEGER},
+      cargos_id = #{cargosId,jdbcType=INTEGER},
+      deal_time = #{dealTime,jdbcType=TIMESTAMP},
+      stores_id = #{storesId,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
 </mapper>

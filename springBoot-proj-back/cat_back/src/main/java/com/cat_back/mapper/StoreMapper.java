@@ -1,22 +1,30 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
 package com.cat_back.mapper;
 
+import com.cat_back.model.Store;
+import com.cat_back.model.StoreExample;
+import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
-import com.cat_back.model.Store;
+public interface StoreMapper {
+    int countByExample(StoreExample example);
 
-/**
- *
- * @author king3212
- */
-public interface  StoreMapper {
-    Store findById(@Param("id") Long id);
-    void insertOne(@Param("store") Store store);
-    void editManager(@Param("store") Store store);
-    void editName(@Param("store") Store store);
-    void DeleteStore(@Param("store") Store store);
+    int deleteByExample(StoreExample example);
+
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Store record);
+
+    int insertSelective(Store record);
+
+    List<Store> selectByExample(StoreExample example);
+
+    Store selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") Store record, @Param("example") StoreExample example);
+
+    int updateByExample(@Param("record") Store record, @Param("example") StoreExample example);
+
+    int updateByPrimaryKeySelective(Store record);
+
+    int updateByPrimaryKey(Store record);
 }

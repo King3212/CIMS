@@ -1,18 +1,30 @@
 package com.cat_back.mapper;
 
+import com.cat_back.model.Cargo;
+import com.cat_back.model.CargoExample;
 import java.util.List;
-
 import org.apache.ibatis.annotations.Param;
 
-import com.cat_back.model.Cargo;
-import com.cat_back.model.CargoFilterParams;
-
 public interface CargoMapper {
-    // 按条件筛选货物并分页
-    
-    List<Cargo> filterCargosUnselt(@Param("params") CargoFilterParams params);
+    int countByExample(CargoExample example);
 
-    List<Cargo> filterCargosSelt(@Param("params") CargoFilterParams params);
+    int deleteByExample(CargoExample example);
 
-    Cargo findById(@Param("id") Long id);
+    int deleteByPrimaryKey(Integer id);
+
+    int insert(Cargo record);
+
+    int insertSelective(Cargo record);
+
+    List<Cargo> selectByExample(CargoExample example);
+
+    Cargo selectByPrimaryKey(Integer id);
+
+    int updateByExampleSelective(@Param("record") Cargo record, @Param("example") CargoExample example);
+
+    int updateByExample(@Param("record") Cargo record, @Param("example") CargoExample example);
+
+    int updateByPrimaryKeySelective(Cargo record);
+
+    int updateByPrimaryKey(Cargo record);
 }
