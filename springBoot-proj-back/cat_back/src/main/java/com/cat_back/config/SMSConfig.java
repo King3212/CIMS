@@ -1,4 +1,4 @@
-package com.cat_back.model;
+package com.cat_back.config;
 
 import java.io.BufferedReader;
 import java.io.IOException;

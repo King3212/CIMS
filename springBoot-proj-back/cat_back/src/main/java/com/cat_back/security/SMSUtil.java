@@ -4,7 +4,7 @@ import com.aliyun.dysmsapi20170525.Client;
 import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
 import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
 import com.aliyun.teaopenapi.models.Config;
-import com.cat_back.model.SMSConfig;
+import com.cat_back.config.SMSConfig;
 import com.google.gson.Gson;
 import org.apache.ibatis.annotations.Param;
 
