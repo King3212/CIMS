@@ -5,11 +5,16 @@ import com.aliyun.dysmsapi20170525.models.SendSmsRequest;
 import com.aliyun.dysmsapi20170525.models.SendSmsResponse;
 import com.aliyun.teaopenapi.models.Config;
 import com.cat_back.config.SMSConfig;
+import com.cat_back.service.RedisServer;
 import com.google.gson.Gson;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Random;
 
+@Service
 public class SMSUtil {
     private final SMSConfig smsConfig;
     private final Client smsClient;
@@ -69,5 +74,24 @@ public class SMSUtil {
         Boolean result = phoneNumber != null && phoneNumber.matches("^1[3-9]\\d{9}$");
         System.out.println("result:"+result);
         return result;
+    }
+
+    @Autowired
+    private RedisServer redisServer;
+
+    public void storeSmsCode(String phoneNumber, String code){
+        redisServer.setValue(phoneNumber,code,300);
+    }
+
+    public String getSmsCode(String phoneNumber){
+        return redisServer.getValue(phoneNumber);
+    }
+
+
+
+    public String genSmsCode(String phoneNumber){
+        Random random = new Random();
+        int code = random.nextInt(900000) + 100000;
+        return String.valueOf(code);
     }
 }
