@@ -3,8 +3,11 @@ package com.cat_back.mapper;
 import com.cat_back.model.Order;
 import com.cat_back.model.OrderExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface OrderMapper {
     int countByExample(OrderExample example);
 

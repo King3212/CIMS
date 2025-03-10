@@ -1,9 +1,7 @@
 package com.cat_back.service;
 
 import com.cat_back.mapper.CargoMapper;
-import com.cat_back.mapper.UserMapper;
 import com.cat_back.model.*;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +16,14 @@ public class CargoService {
     @Autowired
     private CargoMapper cargoMapper;
 
-    private int getStoreIdByUserId(@NotNull int userId) {
+    private int getStoreIdByUserId( int userId) {
         UserService userService = new UserService();
         User user = userService.getUser(userId);
         return user.getStoresId();
     }
 
 
-    public int newCargo (@NotNull Cargo cargo, @NotNull int user_id){
+    public int newCargo ( Cargo cargo,  int user_id){
         int StoreId = getStoreIdByUserId(user_id);
         if (StoreId == 0){
             return -1; // unlegal StoreId
@@ -47,7 +45,7 @@ public class CargoService {
         return cargoMapper.selectByExample(example);
     }
 
-    public List<Cargo> getCargoByFilters(@NotNull CargoFilter cargoFilter, @NotNull int user_id){
+    public List<Cargo> getCargoByFilters( CargoFilter cargoFilter,  int user_id){
         int StoreId = getStoreIdByUserId(user_id);
         if (StoreId == 0){
             return new ArrayList<>(); // unlegal StoreId
@@ -102,7 +100,7 @@ public class CargoService {
         return result;
     }
 
-    public List<Cargo> getCargoByFiltersPaged(@NotNull CargoPageFilter cargoPageFilter, @NotNull int user_id){
+    public List<Cargo> getCargoByFiltersPaged( CargoPageFilter cargoPageFilter,  int user_id){
         List<Cargo> cargoList = getCargoByFilters(cargoPageFilter.cargoFilter, user_id);
         List<Cargo> result = new ArrayList<>();
 
@@ -133,12 +131,12 @@ public class CargoService {
         return result;
     }
 
-    public int getCargoByFiltersNum(@NotNull CargoPageFilter cargoPageFilter, @NotNull int user_id){
+    public int getCargoByFiltersNum( CargoPageFilter cargoPageFilter,  int user_id){
         List<Cargo> cargoList = getCargoByFilters(cargoPageFilter.cargoFilter, user_id);
         return cargoList.size();
     }
 
-    public int updateCargo(@NotNull Cargo cargo, @NotNull int userId) {
+    public int updateCargo( Cargo cargo,  int userId) {
         int storeId = getStoreIdByUserId(userId);
         if (storeId == 0){
             return -1; // unlegal StoreId

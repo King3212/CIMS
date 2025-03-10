@@ -3,8 +3,12 @@ package com.cat_back.mapper;
 import com.cat_back.model.Cargo;
 import com.cat_back.model.CargoExample;
 import java.util.List;
+
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface CargoMapper {
     int countByExample(CargoExample example);
 

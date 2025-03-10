@@ -41,8 +41,6 @@ public class SMSUtil {
             return 1; // 无效的手机号格式
         }
 
-
-
         try {
             SendSmsRequest request = new SendSmsRequest()
                     .setPhoneNumbers(phoneNumber)
@@ -67,6 +65,9 @@ public class SMSUtil {
 
     private boolean isValidPhoneNumber(String phoneNumber) {
         // 更严格的手机号验证正则
-        return phoneNumber != null && phoneNumber.matches("^1[3-9]\\d{9}$");
+        phoneNumber = phoneNumber.trim();
+        Boolean result = phoneNumber != null && phoneNumber.matches("^1[3-9]\\d{9}$");
+        System.out.println("result:"+result);
+        return result;
     }
 }

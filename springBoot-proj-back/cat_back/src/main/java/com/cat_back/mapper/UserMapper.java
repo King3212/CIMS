@@ -3,8 +3,11 @@ package com.cat_back.mapper;
 import com.cat_back.model.User;
 import com.cat_back.model.UserExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface UserMapper {
     int countByExample(UserExample example);
 

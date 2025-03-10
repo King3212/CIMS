@@ -5,7 +5,6 @@ import com.cat_back.security.SHA3Hash;
 import com.cat_back.security.SMSUtil;
 import com.cat_back.service.RedisServer;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigInteger;
@@ -18,10 +17,16 @@ public class UserController {
 
     private SMSUtil smsUtil;
 
+    // JUST SEND SMS
     @PostMapping("/CreateUserSendSMS")
     public SendSmsResponse sendSMS(@RequestBody SendSmsRequest request){
         String code = genSmsCode(request.getPhoneNumber());
         storeSmsCode(request.getPhoneNumber(),  code);
+        try {
+            smsUtil = new SMSUtil();
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
         int isSent = smsUtil.sendCode(code, request.getPhoneNumber(), 0);
 
         SendSmsResponse sendSmsResponse = new SendSmsResponse();
@@ -40,6 +45,10 @@ public class UserController {
         }
         return sendSmsResponse;
     }
+
+    @Autowired
+    private RedisServer redisServer;
+
     private String genSmsCode(String phoneNumber){
         Random random = new Random();
         int code = random.nextInt(900000) + 100000;
@@ -47,16 +56,14 @@ public class UserController {
     }
 
     private void storeSmsCode(String phoneNumber, String code){
-        RedisServer  redisServer = new RedisServer();
-        redisServer.delValue(phoneNumber);
         redisServer.setValue(phoneNumber,code,300);
     }
 
     private String getSmsCode(String phoneNumber){
-        RedisServer  redisServer = new RedisServer();
         return redisServer.getValue(phoneNumber);
     }
 
+    // CHECK THE SMS , CREATE A USER AND RETURN JWT
     @PostMapping("/CreateUserCheckSMS")
     public NewUserResponse  createUserCheckSMS(@RequestBody NewUserRequest request){
         NewUserResponse newUserResponse = new NewUserResponse();
@@ -77,15 +84,9 @@ public class UserController {
         user.setOpenId("");
         user.setPhone(request.getPhone());
 
-
-
-
-
-
-
-
         return  newUserResponse;
     }
+
 
 
 

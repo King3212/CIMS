@@ -3,8 +3,11 @@ package com.cat_back.mapper;
 import com.cat_back.model.Store;
 import com.cat_back.model.StoreExample;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
+@Mapper
 public interface StoreMapper {
     int countByExample(StoreExample example);
 
