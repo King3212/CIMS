@@ -1,0 +1,26 @@
+mybatis:
+  mapper-locations: classpath:/mybatis/*.xml
+  config-location: classpath:mybatis-conf.xml
+
+spring:
+  application:
+    name: cat_back
+    port: 8888
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/cat_proj
+    username: cat
+    password: cat0520
+
+
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password:
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
+
