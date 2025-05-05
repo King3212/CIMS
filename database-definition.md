@@ -10,12 +10,12 @@ USE `CIMS`;
 
 ---
 
-## 👤 用户账户模块
+## 👤 职工账户模块
 
 ```sql
-CREATE TABLE `user` (
-  `user_id` BIGINT AUTO_INCREMENT PRIMARY KEY,
-  `username` VARCHAR(50) NOT NULL UNIQUE,
+CREATE TABLE `staff` (
+  `staff_id` BIGINT AUTO_INCREMENT PRIMARY KEY,
+  `staffname` VARCHAR(50) NOT NULL UNIQUE,
   `password_hashed` VARCHAR(100) NOT NULL,
   `hash_code` VARCHAR(100) NOT NULL,
   `phone_number` VARCHAR(20) NOT NULL UNIQUE,
@@ -43,7 +43,7 @@ CREATE TABLE `shop` (
   `owner_id` BIGINT NOT NULL,  -- 作为店铺管理员
   `is_deleted` BOOLEAN DEFAULT FALSE,  -- 软删除标识
   `created_at` TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-  FOREIGN KEY (`owner_id`) REFERENCES `user`(`user_id`)
+  FOREIGN KEY (`owner_id`) REFERENCES `staff`(`staff_id`)
 );
 
 ```
@@ -73,14 +73,14 @@ CREATE TABLE `goods` (
 
 ## 索引
 
-#### **用户模块**
+#### **职工模块**
 
-**业务操作：** 登录（用户名/手机号）、查重（用户名/手机号）
+**业务操作：** 登录（职工名/手机号）、查重（职工名/手机号）
 
 ```sql
-ALTER TABLE `user`
-  ADD UNIQUE INDEX `idx_user_username` (`username`),
-  ADD UNIQUE INDEX `idx_user_phone_number` (`phone_number`);
+ALTER TABLE `staff`
+  ADD UNIQUE INDEX `idx_staff_staffname` (`staffname`),
+  ADD UNIQUE INDEX `idx_staff_phone_number` (`phone_number`);
 
 ```
 
@@ -90,18 +90,18 @@ ALTER TABLE `user`
 
 **业务操作：**
 
-* 查询用户所有店铺
+* 查询职工所有店铺
 * 查询店铺员工列表
-* 通过 `user_id` 查找是否有角色（权限管理）
+* 通过 `staff_id` 查找是否有角色（权限管理）
 
 ```sql
 ALTER TABLE `shop`
   ADD INDEX `idx_owner_id` (`owner_id`);
 
 ALTER TABLE `shop_staff`
-  ADD INDEX `idx_user_id` (`user_id`),
+  ADD INDEX `idx_staff_id` (`staff_id`),
   ADD INDEX `idx_shop_id` (`shop_id`),
-  ADD UNIQUE INDEX `uk_shop_user` (`shop_id`, `user_id`);
+  ADD UNIQUE INDEX `uk_shop_staff` (`shop_id`, `staff_id`);
 ```
 
 ---

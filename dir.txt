@@ -1,0 +1,101 @@
+cims/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── com/
+│   │   │       └── example/
+│   │   │           └── cims/
+│   │   │               ├── CimsApplication.java
+│   │   │               ├── config/
+│   │   │               │   ├── SecurityConfig.java
+│   │   │               │   ├── JwtConfig.java
+│   │   │               │   ├── MyBatisConfig.java
+│   │   │               │   ├── WebConfig.java
+│   │   │               │   └── SwaggerConfig.java
+│   │   │               ├── controller/
+│   │   │               │   ├── UserController.java
+│   │   │               │   ├── ShopController.java
+│   │   │               │   ├── GoodsController.java
+│   │   │               │   ├── OrderController.java
+│   │   │               │   ├── ImageController.java
+│   │   │               │   └── VerifyCodeController.java
+│   │   │               ├── service/
+│   │   │               │   ├── UserService.java
+│   │   │               │   ├── ShopService.java
+│   │   │               │   ├── GoodsService.java
+│   │   │               │   ├── OrderService.java
+│   │   │               │   ├── ImageService.java
+│   │   │               │   ├── VerifyCodeService.java
+│   │   │               │   ├── impl/
+│   │   │               │   │   ├── UserServiceImpl.java
+│   │   │               │   │   ├── ShopServiceImpl.java
+│   │   │               │   │   └── ...
+│   │   │               ├── dao/
+│   │   │               │   ├── UserMapper.java
+│   │   │               │   ├── ShopMapper.java
+│   │   │               │   ├── GoodsMapper.java
+│   │   │               │   └── OrderMapper.java
+│   │   │               ├── model/
+│   │   │               │   ├── entity/
+│   │   │               │   │   ├── User.java
+│   │   │               │   │   ├── Shop.java
+│   │   │               │   │   ├── Goods.java
+│   │   │               │   │   └── Order.java
+│   │   │               │   ├── dto/
+│   │   │               │   │   ├── request/
+│   │   │               │   │   │   ├── UserRegisterRequest.java
+│   │   │               │   │   │   ├── LoginRequest.java
+│   │   │               │   │   │   └── ...
+│   │   │               │   │   └── response/
+│   │   │               │   │       ├── LoginResponse.java
+│   │   │               │   │       ├── UserInfoResponse.java
+│   │   │               │   │       └── ...
+│   │   │               │   └── vo/
+│   │   │               │       ├── GoodsVO.java
+│   │   │               │       └── ...
+│   │   │               ├── common/
+│   │   │               │   ├── Result.java
+│   │   │               │   ├── exception/
+│   │   │               │   │   ├── BusinessException.java
+│   │   │               │   │   ├── GlobalExceptionHandler.java
+│   │   │               │   │   └── ...
+│   │   │               │   ├── constant/
+│   │   │               │   │   ├── ErrorCode.java
+│   │   │               │   │   └── ...
+│   │   │               │   └── util/
+│   │   │               │       ├── JwtUtil.java
+│   │   │               │       ├── PasswordUtil.java
+│   │   │               │       └── ...
+│   │   │               └── security/
+│   │   │                   ├── JwtAuthenticationFilter.java
+│   │   │                   ├── UserDetailsServiceImpl.java
+│   │   │                   └── ...
+│   │   ├── resources/
+│   │   │   ├── application.yml
+│   │   │   ├── application-dev.yml
+│   │   │   ├── application-prod.yml
+│   │   │   ├── mapper/
+│   │   │   │   ├── UserMapper.xml
+│   │   │   │   ├── ShopMapper.xml
+│   │   │   │   ├── GoodsMapper.xml
+│   │   │   │   └── OrderMapper.xml
+│   │   │   └── static/
+│   │   │       └── uploads/  # 图片上传目录
+│   │   └── webapp/  # 如果有前端内容
+│   └── test/
+│       └── java/
+│           └── com/
+│               └── example/
+│                   └── cims/
+│                       ├── controller/
+│                       │   ├── UserControllerTest.java
+│                       │   └── ...
+│                       ├── service/
+│                       │   ├── UserServiceTest.java
+│                       │   └── ...
+│                       └── dao/
+│                           ├── UserMapperTest.java
+│                           └── ...
+├── pom.xml
+├── README.md
+└── .gitignore

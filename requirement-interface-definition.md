@@ -10,13 +10,13 @@
 
 ---
 
-## 👤 用户账户模块
+## 👤 职工账户模块
 
-### 📝 用户注册
+### 📝 职工注册
 
 ```jsonc
 { // 2S
-  "username": "string",
+  "staffname": "string",
   "password": "string",
   "phoneNumber": "string",
   "verifyCode": "string",
@@ -24,13 +24,13 @@
 }
 ```
 
-### 🔐 用户登录
+### 🔐 职工登录
 
-#### 用户名 + 密码登录
+#### 职工名 + 密码登录
 
 ```jsonc
 { // 2S
-  "username": "string",
+  "staffname": "string",
   "password": "string"
 }
 ```
@@ -63,7 +63,7 @@
 }
 ```
 
-### 👁‍🗨 获取用户信息
+### 👁‍🗨 获取职工信息
 
 ```jsonc
 { // 2S
@@ -73,13 +73,13 @@
 
 ```jsonc
 { // 2C
-  "username": "string",
+  "staffname": "string",
   "passwordSecurity": "easy" | "normal" | "hard",
   "headPicUrl": "string"
 }
 ```
 
-### 🚪 用户登出
+### 🚪 职工登出
 
 ```jsonc
 { // 2S
@@ -141,7 +141,7 @@
 }
 ```
 
-#### 修改用户名
+#### 修改职工名
 
 * 手机号 + 密码：
 
@@ -149,7 +149,7 @@
 { // 2S
   "phoneNumber": "string",
   "password": "string",
-  "newUsername": "string"
+  "newStaffname": "string"
 }
 ```
 
@@ -159,7 +159,7 @@
 { // 2S
   "phoneNumber": "string",
   "verifyCode": "string",
-  "newUsername": "string"
+  "newStaffname": "string"
 }
 ```
 
@@ -417,7 +417,7 @@ POST /api/image/upload
 ```jsonc
 { // 2S
   "phoneNumber": "string",
-  "purpose": "register" | "login" | "changePassword" | "changePhone" | "changeUsername" | "changeEmail"
+  "purpose": "register" | "login" | "changePassword" | "changePhone" | "changeStaffname" | "changeEmail"
 }
 ```
 
@@ -441,7 +441,7 @@ POST /api/image/upload
 { // 2S
   "phoneNumber": "string",
   "verifyCode": "string",
-  "purpose": "register" | "login" | "changePassword" | "changePhone" | "changeUsername" | "changeEmail"
+  "purpose": "register" | "login" | "changePassword" | "changePhone" | "changeStaffname" | "changeEmail"
 }
 ```
 
